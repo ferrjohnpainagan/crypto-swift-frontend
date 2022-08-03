@@ -23,7 +23,7 @@ const CashOut = () => {
   const username = localStorage.getItem('username')
   const customerId = localStorage.getItem('customerId')
   // const customerId = 'customer_profile_e0709472-086a-475d-9b00-aea5ac3c45e7'
-  const accountNumber = localStorage.getItem('bankAccountRecipient')
+  const accountNumber = localStorage.getItem('accountNumber')
   const isLoggedIn = localStorage.getItem('isLoggedIn')
   const exchangeBalance: any = localStorage.getItem('exchangeBalance')
   const mockWalletId = localStorage.getItem('mockWalletId')

@@ -32,6 +32,8 @@ const Stepper = () => {
 
   const styleStep = (step: string) => {
     switch (true) {
+      case currentPath.includes('success') && currentPath.includes(step):
+        return 'success'
       case currentPath.includes(step):
         return 'active'
       case isBefore(step):
@@ -42,9 +44,10 @@ const Stepper = () => {
   }
 
   const displayStepper = () => {
-    console.log(location.pathname.includes('remit'))
     return location.pathname.includes('remit')
   }
+
+  console.log(styleStep('cash-out'))
 
   return (
     <div
@@ -85,7 +88,8 @@ const Stepper = () => {
           <div
             className={`flex-auto border-t-8 border-b-2 ${
               styleStep('cash-in') === 'active' ||
-              styleStep('cash-in') === 'isBefore'
+              styleStep('cash-in') === 'isBefore' ||
+              styleStep('cash-in') === 'success'
                 ? 'border-blue1'
                 : 'border-gray2'
             } `}
@@ -101,7 +105,8 @@ const Stepper = () => {
                   : 'border-blue1 bg-blue1'
               } text-white`}
             >
-              {styleStep('cash-in') === 'isBefore' ? (
+              {styleStep('cash-in') === 'isBefore' ||
+              styleStep('cash-in') === 'success' ? (
                 <>
                   <img src={Check} style={{ width: '15px' }} />
                 </>
@@ -165,7 +170,8 @@ const Stepper = () => {
           <div
             className={`flex-auto border-t-8 border-b-2 ${
               styleStep('exchange') === 'active' ||
-              styleStep('exchange') === 'isBefore'
+              styleStep('exchange') === 'isBefore' ||
+              styleStep('exchange') === 'success'
                 ? 'border-blue1'
                 : 'border-gray2'
             }`}
@@ -181,7 +187,8 @@ const Stepper = () => {
                   : 'border-blue1 bg-blue1'
               } text-white`}
             >
-              {styleStep('exchange') === 'isBefore' ? (
+              {styleStep('exchange') === 'isBefore' ||
+              styleStep('exchange') === 'success' ? (
                 <>
                   <img src={Check} style={{ width: '15px' }} />
                 </>
@@ -205,7 +212,8 @@ const Stepper = () => {
           <div
             className={`flex-auto border-t-8 border-b-2 ${
               styleStep('cash-out') === 'active' ||
-              styleStep('cash-out') === 'isBefore'
+              styleStep('cash-out') === 'isBefore' ||
+              styleStep('cash-out') === 'success'
                 ? 'border-blue1'
                 : 'border-gray2'
             }`}
@@ -221,7 +229,7 @@ const Stepper = () => {
                   : 'border-blue1 bg-blue1'
               } text-white`}
             >
-              {styleStep('cash-out') === 'isBefore' ? (
+              {styleStep('cash-out') === 'success' ? (
                 <>
                   <img src={Check} style={{ width: '15px' }} />
                 </>
