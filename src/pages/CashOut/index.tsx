@@ -101,7 +101,7 @@ const CashOut = () => {
               // username: username,
               customerProfileId: customerId,
               // 'customer_profile_83d91c19-9d38-4cbc-baa2-6c4bafd67d42',
-              bankAccountNumber: '9122234441',
+              bankAccountNumber: accountNumber,
               amount: data.amount,
             })
 
