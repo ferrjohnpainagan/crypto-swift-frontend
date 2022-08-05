@@ -12,11 +12,16 @@ const BankLogin = () => {
   const NODE_ENV = process.env.NODE_ENV
   const navigate = useNavigate()
   const dispatch: AppDispatch = useDispatch()
+  const isLoggedIn = localStorage.getItem('isLoggedIn')
   const [loading, setLoading] = useState(false)
   const [linkToken, setLinkToken] = useState('')
 
   const { linkBankAccountXave, generateMockWalletXave } = useXaveAPI()
   const { generateLinkToken } = usePlaidAuthAPI()
+
+  useEffect(() => {
+    if (isLoggedIn == 'true') navigate('/remit/cash-in')
+  }, [])
 
   const handleLoginBank = async () => {
     setLoading(true)
@@ -61,7 +66,6 @@ const BankLogin = () => {
   }
 
   useEffect(() => {
-    localStorage.clear()
     if (NODE_ENV === 'development') return
     getLinkToken()
   }, [])

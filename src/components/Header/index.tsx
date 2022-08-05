@@ -27,8 +27,21 @@ const Header = () => {
         <a className="text-blue1">Crypto</a>
         <a className="text-indigo1">Swift</a>
       </div>
-      <Remit isActivePage={isActivePage} handleRemit={handleRemit} />
-      <Wallet isActivePage={isActivePage} handleWallet={handleWallet} />
+      <div className="flex w-screen justify-between">
+        <div>
+          <Remit isActivePage={isActivePage} handleRemit={handleRemit} />
+          <Wallet isActivePage={isActivePage} handleWallet={handleWallet} />
+        </div>
+        <div
+          className="flex cursor-pointer items-center font-poppins text-sm"
+          onClick={() => {
+            localStorage.clear()
+            navigate('/remit/bank-login')
+          }}
+        >
+          Logout
+        </div>
+      </div>
     </div>
   )
 }
