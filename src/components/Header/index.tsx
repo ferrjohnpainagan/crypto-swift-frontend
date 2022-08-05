@@ -13,7 +13,11 @@ const Header = () => {
     navigate('/remit/bank-login')
   }
   const handleWallet = () => {
-    navigate('/wallet/home')
+    navigate('/wallet/home', {
+      state: {
+        origin: location.pathname,
+      },
+    })
   }
   // const handleHome = () => {
   //   navigate('/remit/bank-login')
