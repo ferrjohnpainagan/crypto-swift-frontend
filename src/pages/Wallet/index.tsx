@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import HSBar from 'react-horizontal-stacked-bar-chart'
 import { useXaveAPI } from 'hooks/useXaveAPI'
 import currencyFormatter from 'currency-formatter'
@@ -14,6 +14,8 @@ import Loader from 'components/Loader'
 
 const Wallet = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const pathState: any = location?.state || false
   const isLoggedIn = localStorage.getItem('isLoggedIn')
   const mockWalletId = localStorage.getItem('mockWalletId')
   const [currency, setCurrency] = useState<any>(CURRENCIES[0])
@@ -188,6 +190,26 @@ const Wallet = () => {
     console.log(response)
   }
 
+  const handleRemitBtn = () => {
+    let route: string
+    switch (true) {
+      case pathState.origin.includes('success/cash-in'):
+        route = '/remit/bank-recipient'
+        break
+      case pathState.origin.includes('success/exchange'):
+        route = '/remit/cash-out'
+        break
+      case pathState.origin.includes('success/cash-out'):
+        route = '/remit/cash-in'
+        break
+      default:
+        route = pathState.origin
+        break
+    }
+
+    navigate(route)
+  }
+
   return (
     <Card width={'50vw'}>
       <div style={{ height: '550px' }}>
@@ -244,7 +266,7 @@ const Wallet = () => {
             style={{ width: '20vw' }}
             type="button"
             className={`mt-6 flex w-full justify-center rounded-lg bg-blue1 py-3 font-workSans font-medium text-white hover:bg-blue2`}
-            onClick={() => navigate('/remit/cash-in')}
+            onClick={handleRemitBtn}
           >
             Remit
           </button>
