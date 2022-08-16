@@ -6,11 +6,29 @@ import Wallet from './Wallet'
 const Header = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const pathState: any = location?.state || false
   const isActivePage = (page: string) => {
     return location.pathname.includes(page)
   }
   const handleRemit = () => {
-    navigate('/remit/bank-login')
+    // navigate('/remit/bank-login')
+    let route: string
+    switch (true) {
+      case pathState.origin.includes('success/cash-in'):
+        route = '/remit/bank-recipient'
+        break
+      case pathState.origin.includes('success/exchange'):
+        route = '/remit/cash-out'
+        break
+      case pathState.origin.includes('success/cash-out'):
+        route = '/remit/cash-in'
+        break
+      default:
+        route = pathState.origin
+        break
+    }
+
+    navigate(route)
   }
   const handleWallet = () => {
     navigate('/wallet/home', {
